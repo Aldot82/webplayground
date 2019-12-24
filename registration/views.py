@@ -1,5 +1,5 @@
 #from django.contrib.auth.forms import UserCreationForm
-from .forms import UserCreationFormWithEmail
+from .forms import UserCreationFormWithEmail, ProfileForm
 from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
 from django import forms
@@ -28,7 +28,7 @@ class SignUpView(CreateView):
 
 @method_decorator(login_required, name='dispatch')
 class ProfileUpadte(UpdateView):
-    model = Profile
+    from_class = ProfileForm
     fields = ['avatar', 'bio', 'link']
     success_url = reverse_lazy('profile')
     template_name = 'registration/profile_form.html'
