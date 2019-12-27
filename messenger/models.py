@@ -31,8 +31,11 @@ class ThreadManager(models.Manager):
 class Thread(models.Model):
     users = models.ManyToManyField(User, related_name='threads')
     messages = models.ManyToManyField(Message)
-
+    updated = models.DateTimeField(auto_now=True)
     objects = ThreadManager()
+
+    class Meta:
+        ordering = ['-updated']
 
 
 def messages_changed(sender, **kwargs):
@@ -49,6 +52,7 @@ def messages_changed(sender, **kwargs):
                 print(f'Ups, el ususario {msg.user} no está en el thread')
                 false_pk_set.add(msg_pk)
     pk_set.difference_update(false_pk_set)
+    instance.save()
 
 
 m2m_changed.connect(messages_changed, sender=Thread.messages.through)
