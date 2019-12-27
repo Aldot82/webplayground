@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'messenger',
     'pages.apps.PagesConfig',
     'ckeditor',
 ]
@@ -124,18 +125,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#Auth redirect
+# Auth redirect
 #LOGIN_REDIRECT_URL = 'page:pages'
 LOGOUT_REDIRECT_URL = 'home'
 
-#Emails
+# Emails
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 else:
-    #Aquí hay que configurar un email real para producción.
+    # Aquí hay que configurar un email real para producción.
     pass
 
-#Media files
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
